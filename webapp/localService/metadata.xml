@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://r36z.ucc.ovgu.de/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://r36z.ucc.ovgu.de/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://r36z.ucc.ovgu.de/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSD_041_SALES_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZSD_041_C_ORDER_DETAILSType" sap:label="Consumption view for Order details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesDocument"/>
+                </Key>
+                <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales document" sap:quickinfo="Sales Document"/>
+                <Property Name="NetValue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="DocumentCurrency" sap:label="Net Value" sap:quickinfo="Net Value of the Sales Order in Document Currency"/>
+                <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5" sap:label="Document Currency" sap:quickinfo="SD document currency" sap:semantics="currency-code"/>
+                <Property Name="OverallStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Overall Status" sap:quickinfo="Overall Processing Status of Document"/>
+                <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Reqd Delivery Date" sap:quickinfo="Requested Delivery Date"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sold-To Party"/>
+                <Property Name="DocumentItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Sales Document Item"/>
+                <Property Name="MatNr" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Matgroup" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Material Group"/>
+                <Property Name="ItemDescription" Type="Edm.String" MaxLength="40" sap:label="Item Description" sap:quickinfo="Short text for sales order item"/>
+                <Property Name="ItemCategory" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Item category" sap:quickinfo="Sales document item category"/>
+                <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="15" Scale="3" sap:label="Order Quantity" sap:quickinfo="Cumulative order quantity in sales units"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="WeightUnit" sap:label="Gross Weight" sap:quickinfo="Gross Weight of the Item"/>
+                <Property Name="NetWeight" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="WeightUnit" sap:label="Net Weight" sap:quickinfo="Net Weight of the Item"/>
+                <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" sap:label="Weight unit" sap:quickinfo="Weight Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Name 1"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country" sap:quickinfo="Country Key"/>
+                <Property Name="City" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Postal Code"/>
+                <Property Name="Street" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+            </EntityType>
+            <EntityType Name="ZSD_041_C_SALES_ORDERSType" sap:label="Consumption view for SO data" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesDocument"/>
+                </Key>
+                <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales document" sap:quickinfo="Sales Document"/>
+                <Property Name="NetValue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="DocumentCurrency" sap:label="Net Value" sap:quickinfo="Net Value of the Sales Order in Document Currency"/>
+                <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5" sap:label="Document Currency" sap:quickinfo="SD document currency" sap:semantics="currency-code"/>
+                <Property Name="OverallStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Overall Status" sap:quickinfo="Overall Processing Status of Document"/>
+                <Property Name="DeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Reqd Delivery Date" sap:quickinfo="Requested Delivery Date"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sold-To Party"/>
+                <NavigationProperty Name="to_Item" Relationship="ZSD_041_SALES_SRV.assoc_AF29090EAAA2127527F869E4BF3C3574" FromRole="FromRole_assoc_AF29090EAAA2127527F869E4BF3C3574" ToRole="ToRole_assoc_AF29090EAAA2127527F869E4BF3C3574"/>
+            </EntityType>
+            <Association Name="assoc_AF29090EAAA2127527F869E4BF3C3574" sap:content-version="1">
+                <End Type="ZSD_041_SALES_SRV.ZSD_041_C_SALES_ORDERSType" Multiplicity="1" Role="FromRole_assoc_AF29090EAAA2127527F869E4BF3C3574"/>
+                <End Type="ZSD_041_SALES_SRV.ZSD_041_C_ORDER_DETAILSType" Multiplicity="0..1" Role="ToRole_assoc_AF29090EAAA2127527F869E4BF3C3574"/>
+            </Association>
+            <EntityContainer Name="ZSD_041_SALES_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZSD_041_C_ORDER_DETAILS" EntityType="ZSD_041_SALES_SRV.ZSD_041_C_ORDER_DETAILSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZSD_041_C_SALES_ORDERS" EntityType="ZSD_041_SALES_SRV.ZSD_041_C_SALES_ORDERSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_AF29090EAAA2127527F869E4BF3C3574" Association="ZSD_041_SALES_SRV.assoc_AF29090EAAA2127527F869E4BF3C3574" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZSD_041_C_SALES_ORDERS" Role="FromRole_assoc_AF29090EAAA2127527F869E4BF3C3574"/>
+                    <End EntitySet="ZSD_041_C_ORDER_DETAILS" Role="ToRole_assoc_AF29090EAAA2127527F869E4BF3C3574"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="https://r36z.ucc.ovgu.de/sap/opu/odata/sap/ZSD_041_SALES_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://r36z.ucc.ovgu.de/sap/opu/odata/sap/ZSD_041_SALES_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
