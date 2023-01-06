@@ -1,6 +1,9 @@
 <mvc:View
     controllerName="zsd041salesorders.controller.List"
     xmlns="sap.m"
+    xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
     xmlns:semantic="sap.f.semantic"
     xmlns:mvc="sap.ui.core.mvc">
 
@@ -37,28 +40,20 @@
                 selectionChange=".onSelectionChange">
 
                 <headerToolbar>
-                    <OverflowToolbar>
-                        <SearchField
-                            id="searchField"
-                            showRefreshButton="true"
-                            tooltip="{i18n>listSearchTooltip}"
-                            search=".onSearch"
-                            width="auto">
-                            <layoutData>
-                                <OverflowToolbarLayoutData
-                                    minWidth="150px"
-                                    maxWidth="240px"
-                                    shrinkable="true"
-                                    priority="NeverOverflow"/>
-                            </layoutData>
-                        </SearchField>
-                        <ToolbarSpacer/>
-                        <Button
-                            id="sortButton"
-                            press=".onOpenViewSettings"
-                            icon="sap-icon://sort"
-                            type="Transparent"/>
-
+                    <OverflowToolbar id="idInfoToolbar">
+                        <Label text="Status:" labelFor="idComboBox"/>
+                        <ComboBox
+											id="idComboBox"
+                                            showSecondaryValues= "true"
+                                            showClearIcon="true"
+											selectionChange=".onFilter"
+										>
+											<!-- <core:Item key="{OverallStatus}" text="{OverallStatus}"/> -->
+                                            <core:ListItem key="A" text="Not yet processed" additionalText = "A"/>
+                                            <core:ListItem key="B" text="Partially processed" additionalText = "B"/>
+                                            <core:ListItem key="C" text="Completely processed" additionalText = "C"/>
+										</ComboBox>
+                        <ToolbarSpacer />
                     </OverflowToolbar>
                 </headerToolbar>
                 <items>

@@ -302,7 +302,24 @@ sap.ui.define([
             var oViewModel = this.getModel("listView");
             oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
             oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("listFilterBarText", [sFilterBarText]));
-        }
+        },
+
+        onFilter : function (oEvent) {
+
+            let filterList = [];
+            const selected = this.getView().byId("idComboBox").getSelectedKey();
+            console.log(selected);
+    
+            if (selected && selected !== null) {
+                var oFilter = new Filter("OverallStatus", sap.ui.model.FilterOperator.EQ, selected);
+                filterList.push(oFilter);
+                console.log(filterList.length);
+            }
+
+            var list = this.getView().byId("list");
+            var oBinding = list.getBinding("items");
+            oBinding.filter(filterList, "Application");   
+        },
 
     });
 
