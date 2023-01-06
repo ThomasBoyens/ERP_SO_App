@@ -65,8 +65,10 @@
                     <ObjectListItem
                         type="Navigation"
                         press=".onSelectionChange"
-                        title="{SalesDocument}"
-                         />
+                        title="{MatNr}"
+                        intro="{OverallStatus}">
+                         <ObjectAttribute text="{ItemDescription}" />
+                        </ObjectListItem>
                 </items>
             </List>
         </semantic:content>

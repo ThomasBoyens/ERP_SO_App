@@ -1,89 +1,149 @@
-<mvc:View
-    controllerName="zsd041salesorders.controller.Detail"
-    xmlns="sap.m"
-    xmlns:semantic="sap.f.semantic"
-    xmlns:mvc="sap.ui.core.mvc">
+<mvc:View controllerName="zsd041salesorders.controller.Detail" xmlns="sap.uxap" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:m="sap.m" xmlns:core="sap.ui.core" xmlns:semantic="sap.f.semantic" xmlns:mvc="sap.ui.core.mvc">
+    <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" showEditHeaderButton="true" editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <actions>
+                    <m:ToggleButton press=".toggleFullScreen" icon="sap-icon://expand" type="Transparent" />
+                    <m:Button press=".onCloseDetailPress" icon="sap-icon://decline" type="Transparent" />
+                </actions>
 
-    <semantic:SemanticPage
-        id="detailPage"
-        busy="{detailView>/busy}"
-        busyIndicatorDelay="{detailView>/delay}">
-        <semantic:titleHeading>
-            <Title
-                text="{SalesDocument}"
-                level="H2"/>
-        </semantic:titleHeading>
-        <semantic:headerContent>
-            <ObjectAttribute title="{i18n>priceTitle}"/>
-            <ObjectNumber />
-        </semantic:headerContent>
-        <semantic:content>
+                <expandedHeading>
+                    <m:HBox>
+                        <m:Title text="{CustomerName}" wrapping="true" />
+                    </m:HBox>
+                </expandedHeading>
 
-            <Table
-                id="lineItemsList"
-                width="auto"
-                items="{ZSD_041_C_ORDER_DETAILS}"
-                updateFinished=".onListUpdateFinished"
-                noDataText="{i18n>detailLineItemTableNoDataText}"
-                busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-                <headerToolbar>
-                    <Toolbar>
-                        <Title
-                            id="lineItemsTitle"
-                            text="{detailView>/lineItemListTitle}"
-                            titleStyle="H3"
-                            level="H3"/>
-                    </Toolbar>
-                </headerToolbar>
-                <columns>
-                    <Column>
-                        <Text text="{i18n>detailLineItemTableIDColumn}"/>
-                    </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                        hAlign="End">
-                        <Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem>
-                        <cells>
-                            <ObjectIdentifier
-                                title="{SalesDocument}"
-                                text="{SalesDocument}"/>
-                            <ObjectNumber />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
-        </semantic:content>
-        <!--Semantic ShareMenu Buttons-->
-        <semantic:sendEmailAction>
-            <semantic:SendEmailAction
-                id="shareEmail"
-                press=".onSendEmailPress"/>
-        </semantic:sendEmailAction>
+                <snappedHeading>
+                    <m:FlexBox fitContainer="true" alignItems="Center">
+                        <m:Title text="{CustomerName}" wrapping="true" />
+                    </m:FlexBox>
+                </snappedHeading>
 
-        <semantic:closeAction>
-            <semantic:CloseAction
-                    id="closeColumn"
-                    press=".onCloseDetailPress"/>
-        </semantic:closeAction>
+                <expandedContent>
+                    <m:Title text="Price: {NetValue} {DocumentCurrency}" />
+                </expandedContent>
 
-        <semantic:fullScreenAction>
-            <semantic:FullScreenAction
-                    id="enterFullScreen"
-                    visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
-                    press=".toggleFullScreen"/>
-        </semantic:fullScreenAction>
-        <semantic:exitFullScreenAction>
-            <semantic:ExitFullScreenAction
-                    id="exitFullScreen"
-                    visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
-                    press=".toggleFullScreen"/>
-        </semantic:exitFullScreenAction>
+                <snappedContent>
+                    <m:Text text="Price: {NetValue} {DocumentCurrency}" />
+                </snappedContent>
 
-    </semantic:SemanticPage>
+                <snappedTitleOnMobile>
+                    <m:Title text="Price: {NetValue} {DocumentCurrency}" />
+                </snappedTitleOnMobile>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
 
+        <headerContent>
+            <l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                <m:ObjectStatus title="Status" text="{OverallStatus}" />
+                <m:ObjectStatus title="Delivery date" text="{ path: 'DeliveryDate',
+                    type: 'sap.ui.model.type.DateTime',
+                    formatOptions: { style: 'Short',
+                      pattern: 'dd/MM/yy' 
+                    }  
+                  }" />
+            </l:VerticalLayout>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" id="OrderInfoSection" title="Order Info">
+                <subSections>
+                    <ObjectPageSubSection id="OrderInfoSubSection">
+                        <f:Form width="100%">
+                            <f:layout>
+                                <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+                            </f:layout>
+                            <f:formContainers>
+                                <f:FormContainer id="orderInfoLeftColumn">
+                                    <f:formElements>
+                                        <f:FormElement label="Material group">
+                                            <f:fields>
+                                                <m:Text text="{Matgroup}" />
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement label="Order quantity">
+                                            <f:fields>
+                                                <m:Text text="{OrderQuantity}" />
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement label="Item category">
+                                            <f:fields>
+                                                <m:Text text="{ItemCategory}" />
+                                            </f:fields>
+                                        </f:FormElement>
+                                    </f:formElements>
+                                </f:FormContainer>
+                                <f:FormContainer id="orderInfoRightColumn">
+                                    <f:formElements>
+                                        <f:FormElement label="Unit">
+                                            <f:fields>
+                                                <m:Text text="{BaseUnit}" />
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement label="Gross weight">
+                                            <f:fields>
+                                                <m:Text text="{GrossWeight} {WeightUnit}" />
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement label="Netto weight">
+                                            <f:fields>
+                                                <m:Text text="{NetWeight} {WeightUnit}" />
+                                            </f:fields>
+                                        </f:FormElement>
+                                    </f:formElements>
+                                </f:FormContainer>
+                            </f:formContainers>
+                        </f:Form>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection titleUppercase="false" id="CustInfoSection" title="Customer Info">
+                <subSections>
+                    <ObjectPageSubSection id="CustInfoSubSection">
+                        <f:Form width="100%">
+                            <f:layout>
+                                <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+                            </f:layout>
+                            <f:formContainers>
+                                <f:FormContainer id="custInfoLeftColumn">
+                                    <f:formElements>
+                                        <f:FormElement label="Street">
+                                            <f:fields>
+                                                <m:Text text="{Street}" />
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement label="City">
+                                            <f:fields>
+                                                <m:Text text="{PostalCode}, {City}" />
+                                            </f:fields>
+                                        </f:FormElement>
+                                    </f:formElements>
+                                </f:FormContainer>
+                                <f:FormContainer id="custInfoRightColumn">
+                                    <f:formElements>
+                                        <f:FormElement label="Country">
+                                            <f:fields>
+                                                <m:Text text="{Country}" />
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                        <f:FormElement label="Name">
+                                            <f:fields>
+                                                <m:Text text="{CustomerName}" />
+                                            </f:fields>
+                                        </f:FormElement>
+                                    </f:formElements>
+                                </f:FormContainer>
+                            </f:formContainers>
+                        </f:Form>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </mvc:View>

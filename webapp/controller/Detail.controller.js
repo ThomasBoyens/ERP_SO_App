@@ -90,9 +90,9 @@ sap.ui.define([
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
             this.getModel().metadataLoaded().then( function() {
                 var sObjectPath = this.getModel().createKey("ZSD_041_C_SALES_ORDERS", {
-                    SalesDocument:  sObjectId
+                    SalesDocument: sObjectId
                 });
-                this._bindView("/" + sObjectPath);
+                this._bindView("/" + sObjectPath + "/to_Item");
             }.bind(this));
         },
 
@@ -181,7 +181,7 @@ sap.ui.define([
         onCloseDetailPress: function () {
             this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
             // No item should be selected on list after detail page is closed
-            this.getOwnerComponent().oListSelector.clearListListSelection();
+            //this.getOwnerComponent().oListSelector.clearListListSelection();
             this.getRouter().navTo("list");
         },
 
