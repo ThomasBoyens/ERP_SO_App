@@ -105,6 +105,14 @@
             "list",
             "object"
           ]
+        },
+        {
+          "pattern": "create_order",
+          "name": "create",
+          "target": [
+            "list",
+            "create"
+          ]
         }
       ],
       "targets": {
@@ -116,6 +124,12 @@
         "object": {
           "viewName": "Detail",
           "viewId": "detail",
+          "viewLevel": 1,
+          "controlAggregation": "midColumnPages"
+        },
+        "create": {
+          "viewName": "Create",
+          "viewId": "create",
           "viewLevel": 1,
           "controlAggregation": "midColumnPages"
         },

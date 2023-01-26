@@ -1,0 +1,50 @@
+<mvc:View controllerName="zsd041salesorders.controller.Create"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+    <semantic:SemanticPage id="CreatePage" busy="{CreateView>/busy}" busyIndicatorDelay="{CreateView>/delay}" showFooter="true">
+        <semantic:titleHeading>
+            <Title id="_IDGenTitle1" text="New Sales order" type="H2"/>
+        </semantic:titleHeading>
+        <semantic:headerContent>
+        </semantic:headerContent>
+        <semantic:content>
+            <f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" title="Details" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                <f:content>
+                    <Label id="_IDGenLabel1" text="Sold-To Party" />
+                    <Input id="soldTo" value="" maxLength="40" />
+                    <Label id="_IDGenLabel2" text="Customer reference" />
+                    <Input id="custRef" value="" maxLength="40" />
+                    <Label id="_IDGenLabel5" text="Required Delivery Date" />
+                    <DatePicker id="delivDate" valueFormat="yyyyMMdd" value="" />  
+                </f:content>
+            </f:SimpleForm>
+
+        </semantic:content>
+        <!-- Semantic Footer Buttons -->
+        <semantic:positiveAction>
+            <semantic:PositiveAction id="_IDGenPositiveAction1" text="{i18n>save}" press=".onSave" />
+        </semantic:positiveAction>
+
+        <semantic:negativeAction>
+            <semantic:NegativeAction id="_IDGenNegativeAction1" text="{i18n>cancel}" press=".onCancel" />
+        </semantic:negativeAction>
+        <!--Semantic ShareMenu Buttons-->
+        <semantic:closeAction>
+            <semantic:CloseAction id="closeColumn" press=".onCloseDetailPress"/>
+        </semantic:closeAction>
+
+        <semantic:fullScreenAction>
+            <semantic:FullScreenAction id="enterFullScreen" visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}" press=".toggleFullScreen"/>
+        </semantic:fullScreenAction>
+        <semantic:exitFullScreenAction>
+            <semantic:ExitFullScreenAction id="exitFullScreen" visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}" press=".toggleFullScreen"/>
+        </semantic:exitFullScreenAction>
+
+    </semantic:SemanticPage>
+
+
+</mvc:View>

@@ -321,6 +321,11 @@ sap.ui.define([
             oBinding.filter(filterList, "Application");   
         },
 
+        onPressCreate: function () {
+            this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+            this.getRouter().navTo("create");
+        }
+
     });
 
 });
