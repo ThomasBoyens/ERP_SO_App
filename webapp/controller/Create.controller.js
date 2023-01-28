@@ -1,8 +1,9 @@
 sap.ui.define([
     "./BaseController",
+    "sap/ui/model/json/JSONModel",
     'sap/ui/core/library',
     "../model/formatter"
-], function (BaseController, coreLibrary, formatter) {
+], function (BaseController, JSONModel, coreLibrary, formatter) {
     "use strict";
 
     const ValueState = coreLibrary.ValueState;
@@ -11,6 +12,17 @@ sap.ui.define([
 
         formatter: formatter,
 
+        onInit: function () {
+            // new sap.m.DatePicker({
+        //     value : {
+        //         path : "Date",
+        //         type : new sap.ui.model.type.Date({
+        //                     style: "short",
+        //                     UTC: true
+        //             })
+        //     }
+        //     })
+        },
 
         /* =========================================================== */
         /* event handlers                                              */
@@ -18,27 +30,29 @@ sap.ui.define([
 
         onSave: function () {
 
+            const formattedDelivDate = new Date(this.getView().byId("delivDate").getValue());
+
             const oSalesOrder = {
-              "SoldTo" : this.getView().byId("soldTo").getValue(),
-              "CustRef" : this.getView().byId("custRef").getValue(),
-              "DelivDate" : this.getView().byId("delivDate").getValue()
+                "SoldTo": this.getView().byId("soldTo").getValue(),
+                "CustRef": this.getView().byId("custRef").getValue(),
+                "DelivDate": formattedDelivDate
             };
-           
+
             this.getModel().create("/SalesOrderSet", oSalesOrder,
-            {
-                succes: function (oFeedback) { console.log(oFeedback);},
-                error: function (oError) { console.error(oError);}
-            });
+                {
+                    succes: function (oFeedback) { console.log(oFeedback); },
+                    error: function (oError) { console.error(oError); }
+                });
 
             this.clearForm();
-            this.getOwnerComponent().getRouter().navTo("list", { }, true);
+            this.getOwnerComponent().getRouter().navTo("list", {}, true);
             //window.location.reload();
         },
 
         onCancel: function () {
 
             this.clearForm();
-            this.getOwnerComponent().getRouter().navTo("list", { }, true);
+            this.getOwnerComponent().getRouter().navTo("list", {}, true);
         },
 
         clearForm: function () {

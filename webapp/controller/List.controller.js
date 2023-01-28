@@ -308,12 +308,10 @@ sap.ui.define([
 
             let filterList = [];
             const selected = this.getView().byId("idComboBox").getSelectedKey();
-            console.log(selected);
     
             if (selected && selected !== null) {
                 var oFilter = new Filter("OverallStatus", sap.ui.model.FilterOperator.EQ, selected);
                 filterList.push(oFilter);
-                console.log(filterList.length);
             }
 
             var list = this.getView().byId("list");
